@@ -16,6 +16,5 @@ use App\Http\Model\Pdt_Content;
 use App\Http\Model\Product;
 use App\Http\Model\Category;
 Route::get('/', function () {
-
-    return Category::all();
+    return view('login');
 });
