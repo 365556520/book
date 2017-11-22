@@ -20,7 +20,7 @@
     <div></div>
 </div>
 
-<!--BEGIN actionSheet-->
+<!--BEGIN actionSheet导航-->
 <div id="actionSheet_wrap">
     <div class="weui_mask_transition" id="mask"></div>
     <div class="weui_actionsheet" id="weui_actionsheet">
@@ -48,7 +48,6 @@
             mask.hide();
         })
     }
-
     function onMenuClick () {
         var mask = $('#mask');
         var weuiActionsheet = $('#weui_actionsheet');
@@ -61,7 +60,6 @@
         });
         weuiActionsheet.unbind('transitionend').unbind('webkitTransitionEnd');
     }
-
     function onMenuItemClick(index) {
         var mask = $('#mask');
         var weuiActionsheet = $('#weui_actionsheet');
@@ -71,7 +69,6 @@
         } else if(index == 2) {
 
         } else if(index == 3){
-
         } else {
             $('.bk_toptips').show();
             $('.bk_toptips span').html("敬请期待!");
