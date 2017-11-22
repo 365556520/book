@@ -1,7 +1,7 @@
 @extends('master')
+@section('title')
+    <title>登录页面</title>
+@endsection
+@section('content')
 
-@section('title','标题测试')
-
-    @section('content')
-
-        @endsection
+@endsection

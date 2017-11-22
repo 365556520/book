@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>@yield('title')</title>
+    @yield('title')
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
     <link rel="stylesheet" href="{{asset('css/weui.css')}}">
     <link rel="stylesheet" href="{{asset('css/book.css')}}">
@@ -13,12 +13,13 @@
     @yield('content')
 </div>
 
-<!-- tooltips -->
+<!-- tooltips手机tooltips -->
 <div class="bk_toptips"><span></span></div>
 
 <div id="global_menu" onclick="onMenuClick();">
     <div></div>
 </div>
+
 <!--BEGIN actionSheet-->
 <div id="actionSheet_wrap">
     <div class="weui_mask_transition" id="mask"></div>
