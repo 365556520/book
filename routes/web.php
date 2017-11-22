@@ -17,5 +17,6 @@ use App\Http\Model\Product;
 use App\Http\Model\Category;
 Route::get('/', function () {
     echo "测试";
+    echo "ceshi";
     return Category::all();
 });
