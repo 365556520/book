@@ -38,6 +38,7 @@
 
 </body>
 <script type="text/javascript" src="{{asset('js/jquery-1.11.2.min.js')}}"></script>
+@yield('my-js')
 <script type="text/javascript">
     function hideActionSheet(weuiActionsheet, mask) {
         weuiActionsheet.removeClass('weui_actionsheet_toggle');

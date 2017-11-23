@@ -88,7 +88,7 @@ body,html{height:100%;-webkit-tap-highlight-color:transparent}
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #CD4A4A;
+  background-color: #c4d6ec;
   opacity:0.8;
   position: absolute;
   bottom: 25px;
@@ -98,8 +98,7 @@ body,html{height:100%;-webkit-tap-highlight-color:transparent}
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color:
-  #FF2D2D;
+  background-color: #51bcff;
   margin:
   5px;
 }
