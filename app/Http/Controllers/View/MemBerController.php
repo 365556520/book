@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 
 class MemBerController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('login');
     }
-   public function register(){
+
+    public function register()
+    {
         return view('register');
-   }
+    }
 }
