@@ -119,14 +119,12 @@
       $('.weui_cells_form').eq(0).hide();
     }
   });
-<<<<<<< HEAD
-  //点击验证码刷新
-=======
+
   $('.bk_phone_code_send').click(function (event) {
       //发送验证码
   });
 
->>>>>>> 352eb08dbf73597eb3b62332c6f2f72321baee73
+    //点击验证码刷新
   $('.bk_validate_code').click(function () {
     $(this).attr('src', '{{route('validateCode')}}?random=' + Math.random());
   });
