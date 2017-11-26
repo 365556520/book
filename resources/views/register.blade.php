@@ -102,6 +102,7 @@
 
 @section('my-js')
 <script type="text/javascript">
+    //手机和邮箱切换
   $('#x12').next().hide();
   $('input:radio[name=register_type]').click(function(event) {
     $('input:radio[name=register_type]').attr('checked', false);
@@ -118,7 +119,7 @@
       $('.weui_cells_form').eq(0).hide();
     }
   });
-
+  //点击验证码刷新
   $('.bk_validate_code').click(function () {
     $(this).attr('src', '{{url('validateCode')}}?random=' + Math.random());
   });
