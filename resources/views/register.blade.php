@@ -89,7 +89,7 @@
           <input class="weui_input" type="text" placeholder="请输入验证码" name='validate_code'/>
       </div>
       <div class="weui_cell_ft">
-          <img src="{{url('validateCode')}}" class="bk_validate_code"/>
+          <img src="{{route('validateCode')}}" class="bk_validate_code"/>
       </div>
   </div>
 </div>
@@ -97,7 +97,7 @@
 <div class="weui_btn_area">
   <a class="weui_btn weui_btn_primary" href="javascript:" onclick="onRegisterClick();">注册</a>
 </div>
-<a href="{{url('login')}}" class="bk_bottom_tips bk_important">已有帐号? 去登录</a>
+<a href="{{route('login')}}" class="bk_bottom_tips bk_important">已有帐号? 去登录</a>
 @endsection
 
 @section('my-js')
@@ -119,9 +119,16 @@
       $('.weui_cells_form').eq(0).hide();
     }
   });
+<<<<<<< HEAD
   //点击验证码刷新
+=======
+  $('.bk_phone_code_send').click(function (event) {
+      //发送验证码
+  });
+
+>>>>>>> 352eb08dbf73597eb3b62332c6f2f72321baee73
   $('.bk_validate_code').click(function () {
-    $(this).attr('src', '{{url('validateCode')}}?random=' + Math.random());
+    $(this).attr('src', '{{route('validateCode')}}?random=' + Math.random());
   });
 
 </script>

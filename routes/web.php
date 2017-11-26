@@ -12,13 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('login');
+    return  redirect()->route('login');
 });
 Route::group(['namespace'=>'view'],function () {
-    Route::get('login','MemBerController@login');
-    Route::get('register','MemBerController@register');
+    //login登录路由 ，register是注册路由、
+    Route::get('login','MemBerController@login')->name('login');
+    Route::get('register','MemBerController@register')->name('register');
 });
+    //验证码路由
+Route::any('validateCode','Service\ValidateController@create')->name('validateCode');
 
-
-Route::any('validateCode','Service\ValidateController@create');
-
+Route::any('Code','Service\ValidateController@sendSMS')->name('cd');
