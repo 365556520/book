@@ -21,5 +21,7 @@ Route::group(['namespace'=>'view'],function () {
 });
     //验证码路由
 Route::any('validateCode','Service\ValidateController@create')->name('validateCode');
-
-Route::any('Code','Service\ValidateController@sendSMS')->name('cd');
+//短信路由
+Route::any('Code','Service\ValidateController@sendSMS')->name('phoneCode');
+//注册路由
+Route::any('Service/register','Service\MemberController@register')->name('sregister');

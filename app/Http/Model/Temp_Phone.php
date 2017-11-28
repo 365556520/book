@@ -4,7 +4,7 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Temp_Phone extends Model
+class temp_Phone extends Model
 {
     //在Model里面设置数据库表名字和主键
     protected $table='temp_phone';

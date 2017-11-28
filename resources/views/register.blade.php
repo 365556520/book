@@ -156,7 +156,7 @@
             }
         },1000);
         $.ajax({
-            url: '{{route('cd')}}',
+            url: '{{route('phoneCode')}}',
             dataType: 'json',
             cache: false,
             data: {phone: phone},
