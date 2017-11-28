@@ -59,7 +59,7 @@
   <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">邮箱</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="text" placeholder="" name='email'/>
+          <input class="weui_input" type="text" placeholder="请出入邮箱" name='email'/>
       </div>
   </div>
   <div class="weui_cell">
