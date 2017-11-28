@@ -22,4 +22,4 @@ Route::group(['namespace'=>'view'],function () {
     //验证码路由
 Route::any('validateCode','Service\ValidateController@create')->name('validateCode');
 
-Route::any('Code/send','Service\ValidateController@sendSMS')->name('cd');
+Route::any('Code','Service\ValidateController@sendSMS')->name('cd');
