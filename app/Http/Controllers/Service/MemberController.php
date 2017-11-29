@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Service;
 
+use App\Http\Model\Member;
 use App\Http\Model\Temp_Phone;
 use App\Models\M3Result;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class MemberController extends Controller
 {
@@ -44,8 +46,27 @@ class MemberController extends Controller
                 $m3_result->message = '手机验证码为6位';
                 return $m3_result->toJson();
             }
-            //邮箱注册
+            $temp_phone = Temp_Phone::where('phone_phone',$phone)->first();
+            if($temp_phone->phone_code == $phone_code){
+                if(time() > strtotime($temp_phone->phone_deadline)+3600){
+                    $m3_result->status = 7;
+                    $m3_result->message = '手机验证码超时失效';
+                    return $m3_result->toJson();
+                }
+                $member = new Member;
+                $member->member_phone = $phone;
+                $member->member_password = Crypt::encrypt('bk'+$password);
+                $member->save();
+                $m3_result->status = 0;
+                $m3_result->message = '注册成功';
+                return $m3_result->toJson();
+            }else{
+                $m3_result->status = 7;
+                $m3_result->message = '手机验证码不正确';
+                return $m3_result->toJson();
+            }
         }else{
+            //邮箱注册
             if($validate_code == '' || strlen($validate_code) != 4) {
                 $m3_result->status = 6;
                 $m3_result->message = '验证码为4位';

@@ -40,7 +40,7 @@ class ValidateController extends Controller
        $temp_phone = new Temp_Phone();
        $temp_phone->phone_phone = $phone;
        $temp_phone->phone_code = $code;
-       $temp_phone->phone_deadline = date('y-m-m M-i-s',time()+ 60*60);
+       $temp_phone->phone_deadline = date('y-m-d H:i:s',time()+3600);
        $temp_phone->save();
       //短信验证
       //$sendTemplateSMS->sendTemplateSMS("$phone", array($code,60), 1);
