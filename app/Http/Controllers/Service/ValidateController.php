@@ -29,7 +29,7 @@ class ValidateController extends Controller
          return $m3Result->toJson();
      }
       //创建短信验证码对象
-       $sendTemplateSMS = new SendTemplateSMS;
+      // $sendTemplateSMS = new SendTemplateSMS;
       //生成随机数$charset是数据源表示0-9的数字
       $code = '';
       $charset = '1234567890';
