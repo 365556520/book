@@ -238,7 +238,8 @@
 
                         $('.bk_toptips').show();
                         $('.bk_toptips span').html('注册成功');
-                        setTimeout(function() {$('.bk_toptips').hide();$(location).attr('{{route('login')}}');}, 2000);
+                        setTimeout(function() {$('.bk_toptips').hide();$(location).attr('href','{{route('login')}}');}, 2000);
+
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr);
