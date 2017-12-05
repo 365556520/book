@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 Route::group(['namespace'=>'view'],function () {
     //login登录路由 ，register是注册路由、
-    Route::get('login','MemBerController@login')->name('login');
+    Route::get('login','MemBerController@login');
     Route::get('register','MemBerController@register')->name('register');
 });
     //验证码路由用
