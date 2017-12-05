@@ -217,7 +217,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: '{{route('sregister')}}',
+                    url: '{{route('rs')}}',
                     dataType: 'json',
                     cache: false,
                     data: {phone: phone, email: email, password: password, confirm: confirm,
