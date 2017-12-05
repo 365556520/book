@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return  view('welcome');
-});
+Route::get('/','MemBerController@login');
 Route::group(['namespace'=>'view'],function () {
     //login登录路由 ，register是注册路由、
     Route::get('login','MemBerController@login');
