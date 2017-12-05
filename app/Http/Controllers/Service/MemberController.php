@@ -53,9 +53,10 @@ class MemberController extends Controller
                     $m3_result->message = '手机验证码超时失效';
                     return $m3_result->toJson();
                 }
+
                 $member = new Member;
                 $member->member_phone = $phone;
-                $member->member_password =$password;//Crypt::encrypt('bk'+$password);  这个地方在服务器上加密错误
+                $member->member_password =md5('bk'+$password);//Crypt::encrypt('bk'+$password); 这个地方在服务器上加密错误
                 $member->save();
                 $m3_result->status = 0;
                 $m3_result->message = '注册成功';
