@@ -147,3 +147,45 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     </TemplateSMS>
 </Response>
 
+request body = <TemplateSMS>
+                    <to>18613779804</to>
+                    <appId>8aaf07085fe2d98c015febfc179903c5</appId>
+                    <templateId>1</templateId>
+                    <datas><data>088869</data><data>60</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8aaf07085fe2d98c015febfc174503bf/SMS/TemplateSMS?sig=6A05BF9A7903486CCB0B1C961D8ECEDC
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>113302</statusCode>
+    <statusMsg>【短信】您正在使用云通讯测试模板且短信接收者不是注册的测试号码</statusMsg>
+</Response>
+
+request body = <TemplateSMS>
+                    <to>18613779804</to>
+                    <appId>8aaf07085fe2d98c015febfc179903c5</appId>
+                    <templateId>1</templateId>
+                    <datas><data>689165</data><data>60</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8aaf07085fe2d98c015febfc174503bf/SMS/TemplateSMS?sig=18E882986CC9962A156D3F54695E8931
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>113302</statusCode>
+    <statusMsg>【短信】您正在使用云通讯测试模板且短信接收者不是注册的测试号码</statusMsg>
+</Response>
+
+request body = <TemplateSMS>
+                    <to>18937737625</to>
+                    <appId>8aaf07085fe2d98c015febfc179903c5</appId>
+                    <templateId>1</templateId>
+                    <datas><data>434768</data><data>60</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8aaf07085fe2d98c015febfc174503bf/SMS/TemplateSMS?sig=BDB463F2A0358D0340B9D292C42FB4AD
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>000000</statusCode>
+    <TemplateSMS>
+        <smsMessageSid>73bc3bcbc1e544df970a873981a76986</smsMessageSid>
+        <dateCreated>20171130120142</dateCreated>
+    </TemplateSMS>
+</Response>
+
