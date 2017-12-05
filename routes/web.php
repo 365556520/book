@@ -19,7 +19,7 @@ Route::group(['namespace'=>'view'],function () {
     Route::get('login','MemBerController@login')->name('login');
     Route::get('register','MemBerController@register')->name('register');
 });
-    //验证码路由
+    //验证码路由用
 Route::any('validateCode','Service\ValidateController@create')->name('validateCode');
 //短信路由
 Route::any('Code','Service\ValidateController@sendSMS')->name('phoneCode');
