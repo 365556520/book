@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return  view('welcome');
+    return  redirect()->route('login');
 });
 Route::group(['namespace'=>'View'],function () {
     //login登录路由 ，register是注册路由、
