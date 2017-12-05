@@ -55,7 +55,7 @@ class MemberController extends Controller
                 }
                 $member = new Member;
                 $member->member_phone = $phone;
-                $member->member_password = Crypt::encrypt('bk'+$password);
+                $member->member_password =$password;//Crypt::encrypt('bk'+$password);
                 $member->save();
                 $m3_result->status = 0;
                 $m3_result->message = '注册成功';
