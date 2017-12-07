@@ -20,8 +20,16 @@ class ValidateController extends Controller
   //短信验证码
   public function sendSMS(Request $request){
       $m3Result = new M3Result();
+      //Temp_Phone数据库对象
+      $temp_phone = new Temp_Phone();
       //获取输入的手机号
      $phone = $request->input('phone','');
+      if ($temp_phone->where('phone_phone',$phone)->first()){
+          //如果手机号为空
+          $m3Result->status = 8;
+          $m3Result->message = '手机号已经注册过';
+          return $m3Result->toJson();
+      };
      if ($phone == ''){
         //如果手机号为空
          $m3Result->status = 1;
@@ -37,7 +45,6 @@ class ValidateController extends Controller
       for ($i = 0;$i < 6;++$i) {
           $code .= $charset[mt_rand(0, $_len)];
       }
-       $temp_phone = new Temp_Phone();
        $temp_phone->phone_phone = $phone;
        $temp_phone->phone_code = $code;
        $temp_phone->phone_deadline = date('y-m-d H:i:s',time()+3600);
