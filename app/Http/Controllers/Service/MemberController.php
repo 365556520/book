@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Service;
 
 use App\Http\Model\Member;
+use App\Http\Model\Temp_Email;
 use App\Http\Model\Temp_Phone;
 use App\Models\M3Email;
 use App\Models\M3Result;
@@ -51,7 +52,7 @@ class MemberController extends Controller
             }
             $temp_phone = Temp_Phone::where('phone_phone',$phone)->first();
             if($temp_phone->phone_code == $phone_code){
-                if(time() > strtotime($temp_phone->phone_deadline)+3600){
+                if(time() > strtotime($temp_phone->phone_deadline)){
                     $m3_result->status = 7;
                     $m3_result->message = '手机验证码超时失效';
                     return $m3_result->toJson();
@@ -92,9 +93,14 @@ class MemberController extends Controller
             $m3_email->to = $email;
             $m3_email->cc='522392184@qq.com';
             $m3_email->subject = '杏子书店';
-            $m3_email->content ="请于24小时点击该链接完成验证."//.route('jihuo')
+            $m3_email->content ="请于24小时点击该链接完成验证".route('emailjihuo')
                                 .'?member_id='.$member->member_id
                                 .'&code='.$uuid;
+            $tempemail = new Temp_Email;
+            $tempemail->email_member_id = $member->member_id;
+            $tempemail->email_code = $uuid;
+            $tempemail->email_deadline = date('y-m-d H:i:s',time()+24*60*60);
+            $tempemail->save();
             Mail::send('emails', ['m3_email' => $m3_email], function ($m) use ($m3_email) {
                 $m->to($m3_email->to,'尊敬的用户')//收件人的邮箱和称呼
                     ->cc($m3_email->cc)

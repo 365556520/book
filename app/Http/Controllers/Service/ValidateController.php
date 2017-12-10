@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Service;
 
+use App\Http\Model\Member;
+use App\Http\Model\Temp_Email;
 use App\Http\Model\Temp_Phone;
 use App\Models\M3Result;
 use App\Tool\SMS\SendTemplateSMS;
@@ -56,5 +58,25 @@ class ValidateController extends Controller
       $m3Result->status = 0;
       $m3Result->message = '发送成功';
       return $m3Result->toJson();
+  }
+  //邮箱验证
+  public function validateEmail(Request $request){
+    $member_id = $request->input('member_id','');
+    $code = $request->input('code','');
+    $tempemail = Temp_Email::where('email_member_id',$member_id)->first();
+    if ($tempemail == null) {
+        return '验证异常';
+    };
+    if($tempemail->email_code == $code) {
+        if(time() > strtotime($tempemail->email_deadline)){
+            return '该连接已超时失效';
+        }
+        $member =  Member::find($member_id);
+        $member->member_active = 1;
+        $member->save();
+        return redirect()->route('login');
+    }else{
+        return '该连接已失效';
+    }
   }
 }

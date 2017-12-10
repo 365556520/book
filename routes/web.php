@@ -24,4 +24,6 @@ Route::any('validateCode','Service\ValidateController@create')->name('validateCo
 //短信路由
 Route::any('code','Service\ValidateController@sendSMS')->name('phoneCode');
 //注册路由
-Route::post('Service/register','Service\MemberController@register')->name('rs');
+Route::post('service/register','Service\MemberController@register')->name('rs');
+//邮箱注册
+Route::any('service/validate_email','Service\ValidateController@validateEmail')->name('emailjihuo');
