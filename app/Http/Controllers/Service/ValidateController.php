@@ -15,6 +15,8 @@ class ValidateController extends Controller
   public function create(Request $request)
   {
       $validateCode = new ValidateCode;
+      //把当前生成的验证码存到session里面
+      $request->session()->put('validate_code',$validateCode->getCode());
       return $validateCode->doimg();
   }
   //短信验证码
@@ -26,7 +28,7 @@ class ValidateController extends Controller
      $phone = $request->input('phone','');
       if ($temp_phone->where('phone_phone',$phone)->first()){
           //如果手机号为空
-          $m3Result->status = 8;
+          $m3Result->status = 9;
           $m3Result->message = '手机号已经注册过';
           return $m3Result->toJson();
       };

@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Model\Member;
 use App\Http\Model\Temp_Phone;
+use App\Models\M3Email;
 use App\Models\M3Result;
 use App\Http\Controllers\Controller;
+use App\Tool\UUID;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 class MemberController extends Controller
 {
@@ -62,7 +65,7 @@ class MemberController extends Controller
                 $m3_result->message = '注册成功';
                 return $m3_result->toJson();
             }else{
-                $m3_result->status = 7;
+                $m3_result->status = 8;
                 $m3_result->message = '手机验证码不正确';
                 return $m3_result->toJson();
             }
@@ -73,8 +76,35 @@ class MemberController extends Controller
                 $m3_result->message = '验证码为4位';
                 return $m3_result->toJson();
             }
+            //验证码认证
+            $validate_code_session = $request->session()->get('validate_code','');
+            if ($validate_code_session != $validate_code){
+                $m3_result->status = 10;
+                $m3_result->message = '验证码不正确';
+                return $m3_result->toJson();
+            }
+            $member = new Member;
+            $member->member_email = $email;
+            $member->member_password = Crypt::encrypt('bk'.$password);
+            $member->save();
+            $uuid = UUID::create();
+            $m3_email = new M3Email;
+            $m3_email->to = $email;
+            $m3_email->cc='522392184@qq.com';
+            $m3_email->subject = '杏子书店';
+            $m3_email->content ="请于24小时点击该链接完成验证."//.route('jihuo')
+                                .'?member_id='.$member->member_id
+                                .'&code='.$uuid;
+            Mail::send('emails', ['m3_email' => $m3_email], function ($m) use ($m3_email) {
+                $m->to($m3_email->to,'尊敬的用户')//收件人的邮箱和称呼
+                    ->cc($m3_email->cc)
+                    ->subject($m3_email->subject);
+            });
+            $m3_result->status = 0;
+            $m3_result->message = '注册成功';
+            return $m3_result->toJson();
         }
-        return $m3_result->toJson();
+
     }
 }
 
