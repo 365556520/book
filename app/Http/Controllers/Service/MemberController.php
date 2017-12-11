@@ -91,7 +91,7 @@ class MemberController extends Controller
             $uuid = UUID::create();
             $m3_email = new M3Email;
             $m3_email->to = $email;
-            $m3_email->cc='522392184@qq.com';
+//          $m3_email->cc='522392184@qq.com';
             $m3_email->subject = '杏子书店';
             $m3_email->content ="请于24小时点击该链接完成验证".route('emailjihuo')
                                 .'?member_id='.$member->member_id
@@ -103,7 +103,7 @@ class MemberController extends Controller
             $tempemail->save();
             Mail::send('emails', ['m3_email' => $m3_email], function ($m) use ($m3_email) {
                 $m->to($m3_email->to,'尊敬的用户')//收件人的邮箱和称呼
-                    ->cc($m3_email->cc)
+//                    ->cc($m3_email->cc)
                     ->subject($m3_email->subject);
             });
             $m3_result->status = 0;
