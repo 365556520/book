@@ -105,7 +105,8 @@
                     $('.bk_toptips').show();
                     $('.bk_toptips span').html(data.message);
                     setTimeout(function() {$('.bk_toptips').hide();}, 2000);
-
+                    //登录成功跳转
+                    location.href = "{{route('category')}}";
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr);

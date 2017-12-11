@@ -128,6 +128,11 @@ class MemberController extends Controller
         //判断账号是否含有@符号
         if(strpos($username,'@') == true){ //邮箱
             $member = Member::where('member_email',$username)->first();
+            if ($member->member_active == 0){
+                $m3_result->status = 4;
+                $m3_result->message = '请到注册时填写的邮箱里激活';
+                return $m3_result->toJson();
+            }
         }else{//手机
             $member = Member::where('member_phone',$username)->first();
         }

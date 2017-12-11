@@ -72,6 +72,10 @@ class ValidateController extends Controller
             return '该连接已超时失效';
         }
         $member =  Member::find($member_id);
+        if ($member->member_active == 1){
+            //如果激活直接返回登录页面
+            return redirect()->route('login');
+        }
         $member->member_active = 1;
         $member->save();
         return redirect()->route('login');

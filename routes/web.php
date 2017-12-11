@@ -19,15 +19,19 @@ Route::group(['namespace'=>'View'],function () {
     Route::get('login','MemBerController@login')->name('login');
     Route::get('register','MemBerController@register')->name('register');
 });
-Route::group(['namespace'=>'Service'],function (){
+Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     //验证码路由
-    Route::any('validateCode','ValidateController@create')->name('validateCode');
+    Route::get('validateCode','ValidateController@create')->name('validateCode');
     //短信路由
-    Route::any('code','ValidateController@sendSMS')->name('phoneCode');
-    //注册路由
-    Route::post('service/register','MemberController@register')->name('rs');
+    Route::post('code','ValidateController@sendSMS')->name('phoneCode');
     //激活邮箱注册
-    Route::any('service/validate_email','ValidateController@validateEmail')->name('emailjihuo');
+    Route::get('validate_email','ValidateController@validateEmail')->name('emailjihuo');
+    //注册路由
+    Route::post('register','MemberController@register')->name('rs');
     //登录
-    Route::post('service/login','MemberController@login')->name('slogin');
+    Route::post('login','MemberController@login')->name('slogin');
 });
+//测试主页
+Route::any('category', function () {
+    return  view('category');
+})->name('category');

@@ -156,10 +156,11 @@
             }
         },1000);
         $.ajax({
+            type: "POST",
             url: '{{route('phoneCode')}}',
             dataType: 'json',
             cache: false,
-            data: {phone: phone},
+            data: {phone: phone, _token: "{{csrf_token()}}"},
             success: function (data) {
                 if(data == null){
                     $('.bk_toptips').show();
