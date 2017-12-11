@@ -19,11 +19,15 @@ Route::group(['namespace'=>'View'],function () {
     Route::get('login','MemBerController@login')->name('login');
     Route::get('register','MemBerController@register')->name('register');
 });
+Route::group(['namespace'=>'Service'],function (){
     //验证码路由
-Route::any('validateCode','Service\ValidateController@create')->name('validateCode');
-//短信路由
-Route::any('code','Service\ValidateController@sendSMS')->name('phoneCode');
-//注册路由
-Route::post('service/register','Service\MemberController@register')->name('rs');
-//邮箱注册
-Route::any('service/validate_email','Service\ValidateController@validateEmail')->name('emailjihuo');
+    Route::any('validateCode','ValidateController@create')->name('validateCode');
+    //短信路由
+    Route::any('code','ValidateController@sendSMS')->name('phoneCode');
+    //注册路由
+    Route::post('service/register','MemberController@register')->name('rs');
+    //激活邮箱注册
+    Route::any('service/validate_email','ValidateController@validateEmail')->name('emailjihuo');
+    //登录
+    Route::post('service/login','MemberController@login')->name('slogin');
+});
