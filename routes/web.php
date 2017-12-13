@@ -33,6 +33,6 @@ Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     Route::post('register','MemberController@register')->name('rs');
     //登录
     Route::post('login','MemberController@login')->name('slogin');
-
-    Route::get('getCategoryByParentId/{parent_id}','BookController@getCategoryByParentId')->name('getCategoryByParentId');
+    //商品分类路由
+    Route::get('getCategoryByParentId/{id}','BookController@getCategoryByParentId');
 });
