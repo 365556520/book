@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="{{asset('css/book.css')}}">
 </head>
 <body>
-
+<div class="bk_title_bar">
+    <img src="{{asset('images/back.png')}}" class="bk_back" alt="" onclick="history.go(-1);">
+    <p class="bk_title_content"></p>
+    <img src="{{asset('images/menu.png')}}" class="bk_menu" alt="" onclick="onMenuClick();">
+</div>
 <div class="page">
     @yield('content')
 </div>
@@ -16,9 +20,9 @@
 <!-- tooltips手机tooltips -->
 <div class="bk_toptips"><span></span></div>
 
-<div id="global_menu" onclick="onMenuClick();">
-    <div></div>
-</div>
+{{--<div id="global_menu" onclick="onMenuClick();">--}}
+    {{--<div></div>--}}
+{{--</div>--}}
 
 <!--BEGIN actionSheet导航-->
 <div id="actionSheet_wrap">
@@ -40,6 +44,9 @@
 <script type="text/javascript" src="{{asset('js/jquery-1.11.2.min.js')}}"></script>
 @yield('my-js')
 <script type="text/javascript">
+    //标题document.title获取当前页面的标题
+    $('.bk_title_content').html(document.title);
+    //导航
     function hideActionSheet(weuiActionsheet, mask) {
         weuiActionsheet.removeClass('weui_actionsheet_toggle');
         mask.removeClass('weui_fade_toggle');

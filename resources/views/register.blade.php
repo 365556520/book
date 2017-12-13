@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-    <title>注册页面</title>
+    <title>用户注册</title>
 @endsection
 
 @section('content')

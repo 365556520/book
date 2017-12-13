@@ -18,6 +18,9 @@ Route::group(['namespace'=>'View'],function () {
     //login登录路由 ，register是注册路由、
     Route::get('login','MemBerController@login')->name('login');
     Route::get('register','MemBerController@register')->name('register');
+    //主页
+    Route::get('category','BookController@toCategory')->name('category');
+    
 });
 Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     //验证码路由
@@ -30,8 +33,6 @@ Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     Route::post('register','MemberController@register')->name('rs');
     //登录
     Route::post('login','MemberController@login')->name('slogin');
+
+    Route::get('getCategoryByParentId/{parent_id}','BookController@getCategoryByParentId')->name('getCategoryByParentId');
 });
-//测试主页
-Route::any('category', function () {
-    return  view('category');
-})->name('category');
