@@ -22,5 +22,4 @@
     </div>
 @endsection
 @section('my-js')
-
 @endsection
