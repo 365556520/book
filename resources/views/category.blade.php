@@ -32,10 +32,12 @@
             var parent_id = $('.weui_select option:selected').val();
             $.ajax({
                 type: "get",
-                url: '/service/getCategoryByParentId/'+parent_id,
+                url: "{{url('/service/getCategoryByParentId')}}/"+parent_id,
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
+                    console.log("获取类别日志：");
+                    console.log(data);
                     if(data == null){
                         $('.bk_toptips').show();
                         $('.bk_toptips span').html("服务端错误");
@@ -50,9 +52,9 @@
                     }
                     $('.weui_cells_access').html('');
                     //打印
-                    console.log(data.categorys);
                     for (var i =0;i<data.categorys.length;i++){
-                        var node =  '<a class="weui_cell" href="javascript:;">' +
+                        var next =  '{{url("/category_id")}}/'+data.categorys[i].category_id+'/'+data.categorys[i].category_name ;
+                        var node =  '<a class="weui_cell" href="'+next+'">' +
                                         '<div class="weui_cell_bd weui_cell_primary">' +
                                             '<p>'+data.categorys[i].category_name +'</p>' +
                                         '</div>' +
@@ -60,7 +62,6 @@
                                     '</a>';
                         $('.weui_cells_access').append(node);
                     }
-
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr);
