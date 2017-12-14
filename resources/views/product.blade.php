@@ -14,7 +14,7 @@
                      <span class="bk_title">{{$product->product_name}}</span>
                      <div class="bk_price_ft">￥{{$product->product_price}}</div>
                  </div>
-                    <p class="bk_summary  weui_cell_ft">{{$product->product_summary}}</p>
+                    <p class="bk_summary bk_font">{{$product->product_summary}}</p>
                 </div>
             </a>
         @endforeach
