@@ -22,6 +22,8 @@ Route::group(['namespace'=>'View'],function () {
     Route::get('/category','BookController@toCategory')->name('category');
     //商品列表
     Route::get('/category_id/{category_id}/{product_name}','BookController@toProduct');
+    //产品详情
+    Route::get('/product_id/{product_id}','BookController@toPdtContent')->name('pdtcontent');
 });
 Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     //验证码路由

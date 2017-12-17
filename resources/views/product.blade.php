@@ -7,7 +7,7 @@
         <div class="weui_cells weui_cells_access ">
             {{--//产品列表--}}
         @foreach($products as $product)
-            <a class="weui_cell" href="javascript:;">
+            <a class="weui_cell" href="{{route('pdtcontent',$product->product_id)}}">
                 <div class="weui_cell_hd"><img src="{{$product->product_preview}}" class="bk_preview"></div>
                 <div class="weui_cell_hd weui_cell_primary">
                  <div  class="bk_title_bot">
