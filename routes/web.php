@@ -38,5 +38,5 @@ Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     Route::post('/login','MemberController@login')->name('slogin');
     //商品分类路由
     Route::get('/getCategoryByParentId/{id}','BookController@getCategoryByParentId');
-
+    Route::get('/cart/add/{product_id}','CartController@addCart');
 });
