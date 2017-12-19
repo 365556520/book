@@ -25,9 +25,11 @@ Route::group(['namespace'=>'View'],function () {
     Route::get('category_id/{category_id}/{product_name}','BookController@toProduct');
     //产品详情
     Route::get('product_id/{product_id}','BookController@toPdtContent')->name('pdtcontent');
-    //结算页面
-    Route::get('cart','CartController@toCart');
+    //购物车页面
+    Route::get('cart', 'CartController@toCart');
+    Route::group(['middleware' => ['check.login']], function () {
 
+    });
 });
 //处理路由组
 Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
