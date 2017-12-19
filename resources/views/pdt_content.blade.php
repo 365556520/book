@@ -36,7 +36,12 @@
         <div class="weui_cells_title ">详情介绍</div>
         <div class="weui_cells">
             <div class="weui_cell">
-                <p class="bk_font">{{$pdt_content->content}}</p>
+                <p class="bk_font">
+                    @if($pdt_content->content != null)
+                    {!! $pdt_content->content  !!}
+                        @else
+                    @endif
+                </p>
             </div>
         </div>
     </div>
@@ -46,7 +51,7 @@
             <button class="weui_btn weui_btn_primary" onclick="_addCart()">加入购物车</button>
         </div>
         <div class="bk_half_area">
-            <button class="weui_btn weui_btn_default" onclick="">结算(<span id="cart_num" class="m3_price">{{$count}}</span>)</button>
+            <button class="weui_btn weui_btn_default" onclick="_toCaty()">结算(<span id="cart_num" class="m3_price">{{$count}}</span>)</button>
         </div>
     </div>
 @endsection
@@ -67,6 +72,7 @@
                 bullets[pos].className = 'cur';
             }
         });
+        //添加购物车
         function _addCart() {
             var product_id = "{{$product->product_id}}";
             $.ajax({
@@ -87,6 +93,7 @@
                         setTimeout(function() {$('.bk_toptips').hide();}, 2000);
                         return;
                     }
+                    //添加成功后+1
                     var num = $('#cart_num').html();
                     if(num == '') num = 0;
                     $('#cart_num').html(Number(num) +1);
@@ -97,6 +104,9 @@
                     console.log(error);
                 }
             });
+        }
+        function _toCaty() {
+            location.href = '{{url('cart')}}';
         }
     </script>
 @endsection

@@ -34,7 +34,7 @@ class BookController extends Controller
         //$bk_cart如果不为空就用explode（拆分字符串函数根据），为间隔拆分$bk_carr如果是空就给个空字符串
         $bk_cart_arr = ($bk_cart != null ? explode(',',$bk_cart):array());
         $count = 0;
-        foreach ($bk_cart_arr as $value){ //&是引用 基本类型需要引用（相当于$value引用$bk_cart_arr的地址）
+        foreach ($bk_cart_arr as &$value){ //&是引用 基本类型需要引用（相当于$value引用$bk_cart_arr的地址）
             //strpos查找:在$value中出现的位置
             $index = strpos($value,':');
             //substr截取这个字符串从0开始到:号位置的这个字符串

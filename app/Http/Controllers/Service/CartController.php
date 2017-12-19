@@ -36,5 +36,30 @@ class CartController extends Controller
 //        implode是把数组连接成字符串
         return response($m3Result->toJson())->withCookie('bk_cart',implode(',',$bk_cart_arr));
     }
-
+    //删除商品
+    public function  deleteCart(Request $request){
+        $m3Result = new M3Result;
+        $product_ids = $request->input('product_ids','');
+        if ($product_ids == ''){
+            $m3Result->status = 1;
+            $m3Result->message = '数据id为空';
+            $m3Result->toJson();
+        }
+        $product_ids_arr = explode(',',$product_ids);
+        $bk_cart = $request->cookie('bk_cart');
+        $bk_cart_arr = ($bk_cart != null ? explode(',',$bk_cart):array());
+        foreach ($bk_cart_arr as $key => $value){
+            //strpos查找:在$value中出现的位置
+            $index = strpos($value,':');
+            $product_id = substr($value,0,$index);
+            //如果存在则删除
+            if(in_array($product_id,$bk_cart_arr)){
+                array_splice($bk_cart_arr,$key,1);
+                continue;
+            }
+        }
+        $m3Result->status = 0;
+        $m3Result->message = '删除成功';
+        return response($m3Result->toJson())->withCookie('bk_cart',implode(',',$bk_cart_arr));
+    }
 }

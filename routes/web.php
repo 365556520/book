@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return  redirect()->route('login');
 });
+//分配视图路由组
 Route::group(['namespace'=>'View'],function () {
     //login登录路由 ，register是注册路由、
     Route::get('/login','MemBerController@login')->name('login');
@@ -24,7 +25,11 @@ Route::group(['namespace'=>'View'],function () {
     Route::get('/category_id/{category_id}/{product_name}','BookController@toProduct');
     //产品详情
     Route::get('/product_id/{product_id}','BookController@toPdtContent')->name('pdtcontent');
+    //结算页面
+    Route::get('/cart','CartController@toCart');
+
 });
+//处理路由组
 Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     //验证码路由
     Route::get('/validateCode','ValidateController@create')->name('validateCode');
@@ -38,5 +43,8 @@ Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     Route::post('/login','MemberController@login')->name('slogin');
     //商品分类路由
     Route::get('/getCategoryByParentId/{id}','BookController@getCategoryByParentId');
+    //购物车添加路由
     Route::get('/cart/add/{product_id}','CartController@addCart');
+    //购物车删除商品
+    Route::get('/cart/delete','CartController@deleteCart');
 });
