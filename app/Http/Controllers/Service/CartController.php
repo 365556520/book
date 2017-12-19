@@ -9,7 +9,7 @@ use App\Models\M3Result;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
-{
+{   //添加商品
     public function addCart(Request $request,$product_id)
     {   //从cookie查找键值对
         $bk_cart = $request->cookie('bk_cart');
@@ -36,7 +36,7 @@ class CartController extends Controller
 //        implode是把数组连接成字符串
         return response($m3Result->toJson())->withCookie('bk_cart',implode(',',$bk_cart_arr));
     }
-    //删除商品
+    //购物删除商品
     public function  deleteCart(Request $request){
         $m3Result = new M3Result;
         //获取传送过来要删除的id集合
