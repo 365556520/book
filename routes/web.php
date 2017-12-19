@@ -17,34 +17,34 @@ Route::get('/', function () {
 //分配视图路由组
 Route::group(['namespace'=>'View'],function () {
     //login登录路由 ，register是注册路由、
-    Route::get('/login','MemBerController@login')->name('login');
-    Route::get('/register','MemBerController@register')->name('register');
+    Route::get('login','MemBerController@login')->name('login');
+    Route::get('register','MemBerController@register')->name('register');
     //主页
-    Route::get('/category','BookController@toCategory')->name('category');
+    Route::get('category','BookController@toCategory')->name('category');
     //商品列表
-    Route::get('/category_id/{category_id}/{product_name}','BookController@toProduct');
+    Route::get('category_id/{category_id}/{product_name}','BookController@toProduct');
     //产品详情
-    Route::get('/product_id/{product_id}','BookController@toPdtContent')->name('pdtcontent');
+    Route::get('product_id/{product_id}','BookController@toPdtContent')->name('pdtcontent');
     //结算页面
-    Route::get('/cart','CartController@toCart');
+    Route::get('cart','CartController@toCart');
 
 });
 //处理路由组
 Route::group(['prefix' => 'service','namespace'=>'Service'],function (){
     //验证码路由
-    Route::get('/validateCode','ValidateController@create')->name('validateCode');
+    Route::get('validateCode','ValidateController@create')->name('validateCode');
     //短信路由
-    Route::post('/code','ValidateController@sendSMS')->name('phoneCode');
+    Route::post('code','ValidateController@sendSMS')->name('phoneCode');
     //激活邮箱注册
-    Route::get('/validate_email','ValidateController@validateEmail')->name('emailjihuo');
+    Route::get('validate_email','ValidateController@validateEmail')->name('emailjihuo');
     //注册路由
-    Route::post('/register','MemberController@register')->name('rs');
+    Route::post('register','MemberController@register')->name('rs');
     //登录
-    Route::post('/login','MemberController@login')->name('slogin');
+    Route::post('login','MemberController@login')->name('slogin');
     //商品分类路由
-    Route::get('/getCategoryByParentId/{id}','BookController@getCategoryByParentId');
+    Route::get('getCategoryByParentId/{id}','BookController@getCategoryByParentId');
     //购物车添加路由
-    Route::get('/cart/add/{product_id}','CartController@addCart');
+    Route::get('cart/add/{product_id}','CartController@addCart');
     //购物车删除商品
-    Route::get('/cart/delete','CartController@deleteCart');
+    Route::get('cart/delete','CartController@deleteCart')->name('cdelete');
 });

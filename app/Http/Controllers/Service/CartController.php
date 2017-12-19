@@ -39,27 +39,34 @@ class CartController extends Controller
     //删除商品
     public function  deleteCart(Request $request){
         $m3Result = new M3Result;
+        //获取传送过来要删除的id集合
         $product_ids = $request->input('product_ids','');
         if ($product_ids == ''){
             $m3Result->status = 1;
             $m3Result->message = '数据id为空';
             $m3Result->toJson();
         }
+        //explode把这个字符串以，的格式转换成数组
         $product_ids_arr = explode(',',$product_ids);
+        //从cookie中获取里面的数值
         $bk_cart = $request->cookie('bk_cart');
+        //如果不为空就把这从cookie中获取的字符串以,形式转成数组
         $bk_cart_arr = ($bk_cart != null ? explode(',',$bk_cart):array());
         foreach ($bk_cart_arr as $key => $value){
             //strpos查找:在$value中出现的位置
             $index = strpos($value,':');
+            //substr抽取从0到:位置的值(这个商品id)
             $product_id = substr($value,0,$index);
-            //如果存在则删除
-            if(in_array($product_id,$bk_cart_arr)){
+            //如果这个商品的id存在则删除（in_array查找$product_id在$product_ids_arr这个数组中是否存在）
+            if (in_array($product_id,$product_ids_arr)){
+                //array_splice 去掉$bk_cart_arr数组中键为$key的数据删除1个
                 array_splice($bk_cart_arr,$key,1);
                 continue;
-            }
+            };
         }
         $m3Result->status = 0;
         $m3Result->message = '删除成功';
+        //删除成功从新把Cookie数据修改implode把数组转换成字符串以,为分隔符
         return response($m3Result->toJson())->withCookie('bk_cart',implode(',',$bk_cart_arr));
     }
 }
