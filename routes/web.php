@@ -28,7 +28,7 @@ Route::group(['namespace'=>'View'],function () {
     //购物车页面
     Route::get('cart', 'CartController@toCart');
     Route::group(['middleware' => ['check.login']], function () {
-
+        Route::get('order_pay', 'OrderController@toOrderPay');
     });
 });
 //处理路由组

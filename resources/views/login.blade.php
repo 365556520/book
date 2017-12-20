@@ -104,9 +104,15 @@
                     //信息的代码等0时候登录成功
                     $('.bk_toptips').show();
                     $('.bk_toptips span').html(data.message);
-                    setTimeout(function() {$('.bk_toptips').hide();}, 2000);
+                    setTimeout(function() {$('.bk_toptips').hide();}, 6000);
                     //登录成功跳转
-                    location.href = "{{route('category')}}";
+                   //判断是否有值
+                    if ('{{$return_url}}'){
+                        location.href = "{{$return_url}}";
+                    }else{
+                        location.href = '{{route('category')}}';
+                    }
+
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr);

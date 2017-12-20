@@ -52,6 +52,12 @@
                 $(this).next().addClass('weui_icon_checked');
             }
         });
+        //结算
+        function _toCharge(){
+            var car_item_arr = '';
+            location.href = '/order_pay?cart_item_ids='+car_item_arr;
+        }
+
         //删除商品事件
         function _onDelete() {
             var product_ids_arr = [];
