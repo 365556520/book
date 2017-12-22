@@ -51,7 +51,7 @@
             <button class="weui_btn weui_btn_primary" onclick="_addCart()">加入购物车</button>
         </div>
         <div class="bk_half_area">
-            <button class="weui_btn weui_btn_default" onclick="_toCaty()">结算(<span id="cart_num" class="m3_price">{{$count}}</span>)</button>
+            <button class="weui_btn weui_btn_default" onclick="_toCaty()">查看购物车(<span id="cart_num" class="m3_price">{{$count}}</span>)</button>
         </div>
     </div>
 @endsection

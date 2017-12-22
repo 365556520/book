@@ -5,13 +5,41 @@ namespace App\Http\Controllers\Service;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Model\CartItem;
 use App\Models\M3Result;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {   //添加商品
     public function addCart(Request $request,$product_id)
-    {   //从cookie查找键值对
+    {
+        $m3_result = new M3Result;
+        $m3_result->status = 0;
+        $m3_result->message = '添加成功';
+        // 如果当前已经登录
+        $member = $request->session()->get('member', '');
+        if($member != '') {
+            $cart_items = CartItem::where('member_id', $member->member_id)->get();
+            $exist = false;
+            foreach ($cart_items as $cart_item) {
+                if($cart_item->product_id == $product_id) {
+                    $cart_item->count ++;
+                    $cart_item->save();
+                    $exist = true;
+                    break;
+                }
+            }
+            if($exist == false) {
+                $cart_item = new CartItem;
+                $cart_item->product_id = $product_id;
+                $cart_item->count = 1;
+                $cart_item->member_id = $member->member_id;
+                $cart_item->save();
+            }
+
+            return $m3_result->toJson();
+        }
+        //从cookie查找键值对
         $bk_cart = $request->cookie('bk_cart');
         //$bk_cart如果不为空就用explode（拆分字符串函数根据），为间隔拆分$bk_carr如果是空就给个空字符串
         $bk_cart_arr = ($bk_cart != null ? explode(',',$bk_cart):array());
@@ -38,7 +66,10 @@ class CartController extends Controller
     }
     //购物删除商品
     public function  deleteCart(Request $request){
+
         $m3Result = new M3Result;
+        $m3Result->status = 0;
+        $m3Result->message = '删除成功';
         //获取传送过来要删除的id集合
         $product_ids = $request->input('product_ids','');
         if ($product_ids == ''){
@@ -48,6 +79,21 @@ class CartController extends Controller
         }
         //explode把这个字符串以，的格式转换成数组
         $product_ids_arr = explode(',',$product_ids);
+        $member = $request->session()->get('member', '');
+        if($member != '') {
+            // 已登录
+            CartItem::whereIn('product_id', $product_ids_arr)->delete();
+            return $m3Result->toJson();
+        }
+
+        $product_ids = $request->input('product_ids', '');
+        if($product_ids == '') {
+            $m3Result->status = 1;
+            $m3Result->message = '书籍ID为空';
+            return $m3Result->toJson();
+        }
+
+        // 未登录
         //从cookie中获取里面的数值
         $bk_cart = $request->cookie('bk_cart');
         //如果不为空就把这从cookie中获取的字符串以,形式转成数组
@@ -64,8 +110,7 @@ class CartController extends Controller
                 continue;
             };
         }
-        $m3Result->status = 0;
-        $m3Result->message = '删除成功';
+
         //删除成功从新把Cookie数据修改implode把数组转换成字符串以,为分隔符
         return response($m3Result->toJson())->withCookie('bk_cart',implode(',',$bk_cart_arr));
     }
