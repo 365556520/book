@@ -54,8 +54,21 @@
         });
         //结算
         function _toCharge(){
-            var car_item_arr = '';
-            location.href = '/order_pay?cart_item_ids='+car_item_arr;
+            var product_ids_arr = [];
+            $('input:checkbox[name=cart_item]').each(function (index,el) {
+                //判断是否选中
+                if($(this).attr('checked') == 'checked'){
+                    //获取选中的id并且添加到数组中
+                    product_ids_arr.push($(this).attr('id'));
+                }
+            });
+            if (product_ids_arr.length == 0){
+                $('.bk_toptips').show();
+                $('.bk_toptips span').html('请选择提交选项');
+                setTimeout(function() {$('.bk_toptips').hide();}, 3000);
+                return;
+            }
+            location.href = '/order_commit/'+product_ids_arr;
         }
 
         //删除商品事件
