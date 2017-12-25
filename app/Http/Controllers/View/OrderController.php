@@ -12,9 +12,9 @@ class OrderController extends Controller
 {
     public function toOrderCommit(Request $request,$product_ids)
     {
-        //ÈıÔªÔËËã
+        //ä¸‰å…ƒè¿ç®—å­˜åœ¨å°±è½¬æ¢æˆæ•°ç»„
         $product_ids_arr = ($product_ids!=''?explode(',',$product_ids) : array());
-        //²éÕÒ³öµÇÂ¼ÓÃ»§
+        //å¾—åˆ°ç”¨æˆ·çš„ä¿¡æ¯
         $member = $request->session()->get('member','');
         $cart_items = CartItem::where('member_id',$member->member_id)->whereIn('product_id',$product_ids_arr)->get();
         $cart_items_arr = array();
@@ -22,9 +22,9 @@ class OrderController extends Controller
         foreach ($cart_items as $cart_item){
             $cart_item->product = Product::find($cart_item->product_id);
             if($cart_item->product != null){
-                //¼ÆËã¼Û¸ñ
+                //è®¡ç®—æ€»åŠ ä¸ª
                 $total_price += $cart_item->product->product_price * $cart_item->count;
-                //ÔÚÊı×éÖĞ×·¼Ó²éÑ¯µ½ĞÅÏ¢
+                //æŠŠå•†å“çš„ä¿¡æ¯æ’å…¥åˆ°æ•°ç»„ä¸­
                 array_push($cart_items_arr,$cart_item);
             }
         }
