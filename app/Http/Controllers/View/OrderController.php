@@ -5,6 +5,8 @@ namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\CartItem;
+use App\Http\Model\Order;
+use App\Http\Model\Orderitem;
 use App\Http\Model\Product;
 use Illuminate\Http\Request;
 
@@ -31,6 +33,17 @@ class OrderController extends Controller
         return  view('order_commit',compact('cart_items_arr','total_price'));
     }
     public function toOrderList(Request $request ){
-        return view('order_list');
+        //得到用户的信息
+        $member = $request->session()->get('member','');
+        $orders = Order::where('member_id',$member->member_id)->get();
+        foreach ($orders as $order){
+            $order_items = Orderitem::where('order_id',$order->id)->get();
+            $order->order_items = $order_items;
+            foreach ($order_items as $order_item){
+                $order_item->product = Product::find($order_item->product_id);
+            }
+        }
+
+        return view('order_list')->with('orders',$orders);
     }
 }
